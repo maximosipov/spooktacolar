@@ -1,0 +1,371 @@
+<title>Taco &amp; Pisco Night</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Creepster&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one candlelit reading column on a deliberately dark page; papel-picado with skulls on top,
+   bats drifting across a fixed layer, recipe cards whose illustrations hide a ghost. Single dark theme by choice. */
+:root{
+  color-scheme:dark;
+  --night:#15111d; --crypt:#211a2c; --stone:#3a3047;
+  --bone:#f1ead8; --dust:#b9aec4;
+  --marigold:#f5a524; --slime:#9fe06a; --blood:#e8483d; --violet:#a77be0;
+  --display:"Creepster", "Chiller", fantasy, cursive;
+  --body:"Atkinson Hyperlegible", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, monospace;
+}
+html{background:var(--night)}
+body{background:var(--night);color:var(--bone);font-family:var(--body);font-size:17px;line-height:1.6;overflow-x:hidden;
+  background-image:radial-gradient(ellipse 80% 40% at 50% 0%, rgba(167,123,224,.18), transparent 70%);
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+main{max-width:720px;margin:0 auto;padding-block:0 72px;display:flex;flex-direction:column;gap:48px;position:relative;z-index:1}
+h1,h2{font-family:var(--display);font-weight:400;line-height:1.05;text-wrap:balance;margin:0;letter-spacing:.02em}
+h2{font-size:clamp(2rem,6vw,2.6rem);color:var(--marigold)}
+h3{margin:0;font-size:1.25rem}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;color:var(--dust)}
+a{color:var(--slime)}
+:focus-visible{outline:2px solid var(--slime);outline-offset:3px}
+
+/* papel picado */
+.picado{display:flex;gap:6px;height:64px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:8px;position:relative}
+.picado::before{content:"";position:absolute;left:0;right:0;top:2px;height:2px;background:var(--dust);opacity:.5}
+.flag{flex:1;transform-origin:50% 0;animation:sway 3.2s ease-in-out infinite;display:grid;place-items:center;
+  clip-path:polygon(0 4%,100% 4%,100% 78%,84% 100%,68% 82%,50% 100%,32% 82%,16% 100%,0 78%)}
+.flag:nth-child(4n+1){background:var(--blood)}.flag:nth-child(4n+2){background:var(--marigold);animation-delay:-.8s}
+.flag:nth-child(4n+3){background:var(--violet);animation-delay:-1.6s}.flag:nth-child(4n+4){background:var(--slime);animation-delay:-2.4s}
+.flag svg{width:24px;height:24px}
+@keyframes sway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+
+/* hero */
+header{display:flex;flex-direction:column;gap:16px;padding-top:28px;position:relative}
+h1{font-size:clamp(3rem,13vw,5.4rem);color:var(--slime);text-shadow:0 0 18px rgba(159,224,106,.35)}
+h1 .l{display:inline-block;animation:flicker 6s infinite}
+h1 .l:nth-child(3n){animation-delay:-2s}h1 .l:nth-child(4n){animation-delay:-3.7s}
+@keyframes flicker{0%,91%,95%,100%{opacity:1}92%,94%{opacity:.25}}
+.drip{display:block;height:22px;margin-top:-6px;width:min(360px,80%)}
+.lede{font-size:1.14rem;max-width:58ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--mono);font-size:.85rem;color:var(--dust)}
+.ghost-hero{position:absolute;right:0;top:34px;width:96px;animation:bob 3.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+.ghost-hero .eye{animation:blink 5s infinite;transform-origin:center;transform-box:fill-box}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@media (max-width:520px){.ghost-hero{width:64px;top:96px}}
+
+/* bats */
+.bats{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.bat{position:absolute;left:-60px;width:44px;opacity:.75;animation:fly 18s linear infinite}
+.bat:nth-child(1){top:18%}
+.bat:nth-child(2){top:46%;width:30px;animation-duration:24s;animation-delay:-9s}
+.bat:nth-child(3){top:72%;width:36px;animation-duration:21s;animation-delay:-15s}
+.bat .wing{animation:flap .28s ease-in-out infinite alternate;transform-origin:50% 40%;transform-box:fill-box}
+@keyframes fly{0%{transform:translate(0,0)}25%{transform:translate(28vw,-30px)}50%{transform:translate(55vw,20px)}75%{transform:translate(80vw,-24px)}100%{transform:translate(calc(100vw + 120px),0)}}
+@keyframes flap{from{transform:scaleY(1)}to{transform:scaleY(.35)}}
+
+/* why */
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.why div{background:var(--crypt);border:1px solid var(--stone);border-radius:12px;padding:14px 16px}
+.why b{display:block;color:var(--marigold);font-size:1.05rem}
+
+/* timeline */
+.legend{font-size:.88rem;color:var(--dust)}
+ol.tl{list-style:none;margin:0;padding:0;border-left:2px dashed var(--stone);display:flex;flex-direction:column;gap:16px}
+ol.tl li{display:grid;grid-template-columns:74px 1fr;gap:10px;position:relative;padding-left:18px}
+ol.tl li::before{content:"";position:absolute;left:-7px;top:4px;width:12px;height:16px;border-radius:50% 50% 45% 45%/60% 60% 40% 40%;
+  background:var(--marigold);box-shadow:0 0 10px var(--marigold);animation:flame 1.4s ease-in-out infinite alternate}
+ol.tl li:nth-child(2n)::before{animation-delay:-.7s}
+ol.tl li.guest::before{background:var(--slime);box-shadow:0 0 12px var(--slime)}
+@keyframes flame{from{transform:scale(1) rotate(-4deg)}to{transform:scale(.85,1.12) rotate(4deg)}}
+ol.tl time{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:.9rem;color:var(--dust);padding-top:2px}
+.who{font-family:var(--mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--slime)}
+
+/* recipe cards */
+.recipes{display:flex;flex-direction:column;gap:22px}
+.recipe{background:var(--crypt);border:1px solid var(--stone);border-radius:16px;overflow:hidden}
+.poke{display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;position:relative;color:inherit;font:inherit}
+.poke svg.art{display:block;width:100%;height:auto;max-width:100%}
+.poke .hint{position:absolute;right:12px;bottom:10px;font-family:var(--mono);font-size:.72rem;color:var(--dust);
+  background:rgba(21,17,29,.7);padding:3px 8px;border-radius:99px}
+.poke:hover svg.art .taco{animation:jiggle .5s ease-in-out}
+@keyframes jiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-3deg)}75%{transform:rotate(3deg)}}
+.taco{transform-origin:300px 150px}
+.pop{opacity:0;transform:translateY(40px) scale(.6);transition:transform .45s cubic-bezier(.3,1.6,.5,1),opacity .2s;transform-origin:300px 120px}
+.poke.boo .pop{opacity:1;transform:translateY(-6px) scale(1)}
+.recipe .in{padding:18px 18px 22px;display:flex;flex-direction:column;gap:12px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.cols > *{min-width:0}
+ul,ol.steps{margin:0;padding-left:1.2em}
+li{margin:3px 0}
+li::marker{color:var(--marigold)}
+.q{font-family:var(--mono);font-size:.88em;font-variant-numeric:tabular-nums;color:var(--marigold)}
+.tip{font-size:.94rem;color:var(--dust);border-left:3px solid var(--violet);padding-left:10px}
+.tip b{color:var(--bone)}
+.src{font-size:.82rem;color:var(--dust);font-style:italic}
+
+/* pisco glass */
+.bubble{animation:rise 3s ease-in infinite;opacity:0}
+.bubble:nth-of-type(2){animation-delay:-1s}.bubble:nth-of-type(3){animation-delay:-2s}
+@keyframes rise{0%{opacity:0;transform:translateY(0)}20%{opacity:.9}100%{opacity:0;transform:translateY(-40px)}}
+
+footer{font-size:.85rem;color:var(--dust);display:flex;flex-direction:column;gap:6px}
+footer ul{padding-left:1.1em}
+.rip{font-family:var(--display);font-size:1.6rem;color:var(--stone);text-align:center;margin-top:12px}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .bats{display:none}
+}
+</style>
+
+<div class="bats" aria-hidden="true">
+  <svg class="bat" viewBox="0 0 60 30"><g fill="#0b0810" stroke="#6c5a80" stroke-width=".8"><path class="wing" d="M30 14 C22 2 10 2 2 10 C8 10 10 14 12 18 C16 14 20 16 22 20 C24 16 27 15 30 18 C33 15 36 16 38 20 C40 16 44 14 48 18 C50 14 52 10 58 10 C50 2 38 2 30 14Z"/><ellipse cx="30" cy="16" rx="4" ry="6"/></g></svg>
+  <svg class="bat" viewBox="0 0 60 30"><g fill="#0b0810" stroke="#6c5a80" stroke-width=".8"><path class="wing" d="M30 14 C22 2 10 2 2 10 C8 10 10 14 12 18 C16 14 20 16 22 20 C24 16 27 15 30 18 C33 15 36 16 38 20 C40 16 44 14 48 18 C50 14 52 10 58 10 C50 2 38 2 30 14Z"/><ellipse cx="30" cy="16" rx="4" ry="6"/></g></svg>
+  <svg class="bat" viewBox="0 0 60 30"><g fill="#0b0810" stroke="#6c5a80" stroke-width=".8"><path class="wing" d="M30 14 C22 2 10 2 2 10 C8 10 10 14 12 18 C16 14 20 16 22 20 C24 16 27 15 30 18 C33 15 36 16 38 20 C40 16 44 14 48 18 C50 14 52 10 58 10 C50 2 38 2 30 14Z"/><ellipse cx="30" cy="16" rx="4" ry="6"/></g></svg>
+</div>
+
+<main>
+  <div class="picado" aria-hidden="true" id="picado"></div>
+
+  <header>
+    <svg class="ghost-hero" viewBox="0 0 100 120" aria-hidden="true">
+      <path d="M50 6 C24 6 12 28 12 52 L12 104 L24 94 L36 106 L50 94 L64 106 L76 94 L88 104 L88 52 C88 28 76 6 50 6Z" fill="var(--bone)"/>
+      <ellipse class="eye" cx="38" cy="46" rx="6" ry="9" fill="var(--night)"/>
+      <ellipse class="eye" cx="62" cy="46" rx="6" ry="9" fill="var(--night)"/>
+      <ellipse cx="50" cy="68" rx="7" ry="9" fill="var(--night)"/>
+      <path d="M70 84 A20 15 0 0 1 98 84 Z" fill="var(--marigold)"/><path d="M74 84 A15 10 0 0 1 94 84 Z" fill="#8a4a24"/>
+    </svg>
+    <p class="eyebrow">Dinner for 6 · cook together · very lightly haunted</p>
+    <h1 id="title">Taco &amp; Pisco Night</h1>
+    <svg class="drip" viewBox="0 0 360 22" aria-hidden="true"><path d="M0 0 H360 V4 C350 4 348 18 342 18 C336 18 336 6 326 6 C312 6 314 14 300 14 C292 14 290 5 270 5 C250 5 252 20 244 20 C236 20 238 6 216 6 C190 6 196 12 176 12 C160 12 160 4 140 4 C124 4 126 22 116 22 C106 22 108 6 88 6 C70 6 72 14 56 14 C44 14 44 5 28 5 C14 5 16 12 0 12Z" fill="var(--slime)" opacity=".85"/></svg>
+    <p class="lede">Two tacos that cook themselves while you're out haunting the shops, a pisco sour bar run by your guests, and about 15 minutes of actual cooking once the doorbell goes.</p>
+    <div class="facts"><span>Guests 19:00</span><span>Eat ~20:00</span><span>Cooking after 19:00: ~15 min</span><span>36 small tortillas</span></div>
+  </header>
+
+  <section style="display:flex;flex-direction:column;gap:16px">
+    <h2>The two fillings</h2>
+    <div class="why">
+      <div><b>Oven carnitas</b>Three hours in the oven in the afternoon. On the night it only needs a quick pan-crisp.</div>
+      <div><b>Chicken tinga</b>Smoky chipotle-tomato chicken. About 15 minutes on the hob before guests arrive, then reheated.</div>
+    </div>
+    <p>Everything else waits on the toppings table: pico de gallo, avocado crema, purple slaw, pickled chillies, coriander and lime. Guests build their own.</p>
+    <p class="tip"><b>Rather have beans?</b> Swap the tinga for warmed black beans with the same chipotles and onion. It works on the same toppings. Say the word and I'll write it up properly.</p>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px">
+    <h2>Timeline</h2>
+    <p class="legend">Green candles are jobs for guests.</p>
+    <ol class="tl">
+      <li><time>Day before</time><div>Sugar syrup and pickled chillies. Chill the glasses on the day.</div></li>
+      <li><time>15:30</time><div>Season the pork, into the oven at 165°C. Walk away for about 3 hours.</div></li>
+      <li><time>18:00</time><div>Make the chicken tinga (about 15 min). Salt the cabbage for the slaw. Chop pico. Blend crema.</div></li>
+      <li><time>18:30</time><div>Pork out, shred with two forks, keep covered. Lay out the toppings table.</div></li>
+      <li class="guest"><time>19:00</time><div><span class="who">Bar team</span><br>Guests arrive. Two volunteers blend the first round of pisco sours.</div></li>
+      <li class="guest"><time>19:45</time><div><span class="who">Three volunteers</span><br>One crisps the carnitas in a hot pan, one reheats the tinga, one warms tortillas in a dry pan and wraps them in a tea towel.</div></li>
+      <li><time>20:00</time><div>Build your own and eat. Second round of sours.</div></li>
+    </ol>
+  </section>
+
+  <section class="recipes">
+    <h2>Recipes</h2>
+
+    <article class="recipe">
+      <button class="poke" type="button" aria-label="Poke the carnitas taco">
+        <svg class="art" viewBox="0 0 600 200" aria-hidden="true">
+          <rect width="600" height="200" fill="var(--stone)" opacity=".35"/>
+          <g class="pop"><path d="M300 20 C280 20 272 36 272 52 L272 92 L282 84 L292 94 L300 86 L308 94 L318 84 L328 92 L328 52 C328 36 320 20 300 20Z" fill="var(--bone)"/><circle cx="291" cy="48" r="4" fill="var(--night)"/><circle cx="309" cy="48" r="4" fill="var(--night)"/><text x="345" y="44" font-family="Creepster, fantasy" font-size="30" fill="var(--slime)">BOO!</text></g>
+          <g class="taco">
+            <path d="M150 160 A150 110 0 0 1 450 160 Z" fill="var(--marigold)"/>
+            <path d="M190 160 A110 78 0 0 1 410 160 Z" fill="#7d4524"/>
+            <g fill="#b9713f"><rect x="220" y="120" width="40" height="16" rx="5"/><rect x="290" y="108" width="46" height="18" rx="5"/><rect x="345" y="128" width="34" height="14" rx="5"/></g>
+            <g fill="var(--bone)"><circle cx="250" cy="110" r="6"/><circle cx="318" cy="100" r="5"/><circle cx="370" cy="118" r="6"/></g>
+            <g fill="var(--slime)"><ellipse cx="275" cy="102" rx="10" ry="5"/><ellipse cx="340" cy="96" rx="9" ry="4"/></g>
+            <rect x="150" y="160" width="300" height="10" rx="5" fill="#c9861a"/>
+          </g>
+        </svg>
+        <span class="hint">tap me</span>
+      </button>
+      <div class="in">
+        <p class="eyebrow">Oven · 3 h unattended</p>
+        <h3>Oven carnitas</h3>
+        <div class="cols">
+          <ul>
+            <li><span class="q">1.2 kg</span> pork shoulder, 5 cm chunks</li>
+            <li><span class="q">120 ml</span> orange juice</li>
+            <li><span class="q">4</span> bay leaves</li>
+            <li><span class="q">2 tsp</span> each sea salt, ground cumin</li>
+            <li><span class="q">1 tsp</span> each chilli powder, garlic powder, onion powder, dried oregano, black pepper</li>
+          </ul>
+          <ol class="steps">
+            <li>Heat oven to 165°C. Toss pork with the spices in a casserole dish.</li>
+            <li>Add the juice and bay, plus water to come about halfway up the meat. Lid on.</li>
+            <li>Cook about 3 h until it pulls apart. Shred.</li>
+            <li>To serve, fry in a hot pan until the edges crisp.</li>
+          </ol>
+        </div>
+        <p class="src">Adapted from Grantourismo (spices, quantities, 165°C, 3 h; serves 8) and Edible Phoenix (covered, half-submerged method).</p>
+      </div>
+    </article>
+
+    <article class="recipe">
+      <button class="poke" type="button" aria-label="Poke the chicken tinga taco">
+        <svg class="art" viewBox="0 0 600 200" aria-hidden="true">
+          <rect width="600" height="200" fill="var(--blood)" opacity=".16"/>
+          <g class="pop"><circle cx="300" cy="56" r="30" fill="var(--bone)"/><rect x="284" y="78" width="32" height="18" rx="4" fill="var(--bone)"/><circle cx="289" cy="54" r="8" fill="var(--night)"/><circle cx="311" cy="54" r="8" fill="var(--night)"/><path d="M296 68 L300 62 L304 68Z" fill="var(--night)"/><g stroke="var(--night)" stroke-width="2"><line x1="292" y1="80" x2="292" y2="94"/><line x1="300" y1="80" x2="300" y2="94"/><line x1="308" y1="80" x2="308" y2="94"/></g><text x="344" y="50" font-family="Creepster, fantasy" font-size="26" fill="var(--marigold)">¡HOLA!</text></g>
+          <g class="taco">
+            <path d="M150 160 A150 110 0 0 1 450 160 Z" fill="var(--marigold)"/>
+            <path d="M188 160 A112 80 0 0 1 412 160 Z" fill="#a8321f"/>
+            <g stroke="#e9b68a" stroke-width="7" stroke-linecap="round" fill="none"><path d="M220 128 l40 -10"/><path d="M280 116 l46 6"/><path d="M340 132 l34 -12"/><path d="M250 140 l60 -4"/></g>
+            <g fill="var(--bone)"><circle cx="262" cy="104" r="7"/><circle cx="350" cy="106" r="7"/></g>
+            <g fill="var(--slime)"><ellipse cx="300" cy="98" rx="10" ry="5"/><ellipse cx="236" cy="118" rx="8" ry="4"/></g>
+            <rect x="150" y="160" width="300" height="10" rx="5" fill="#c9861a"/>
+          </g>
+        </svg>
+        <span class="hint">tap me</span>
+      </button>
+      <div class="in">
+        <p class="eyebrow">Hob · 15 min · make at 18:00</p>
+        <h3>Chicken tinga</h3>
+        <div class="cols">
+          <ul>
+            <li><span class="q">900 g</span> boneless, skinless chicken thighs, in 1 cm pieces</li>
+            <li><span class="q">2</span> large white onions, sliced</li>
+            <li><span class="q">6</span> garlic cloves, finely chopped</li>
+            <li><span class="q">2 × 400 g</span> tins diced tomatoes, fire-roasted if you can, lightly drained</li>
+            <li><span class="q">6–8</span> chipotles in adobo, thinly sliced</li>
+            <li><span class="q">2 tsp</span> dried oregano (Mexican if possible)</li>
+            <li>Oil; about <span class="q">2 tsp</span> salt; a splash of vinegar</li>
+          </ul>
+          <ol class="steps">
+            <li>Large frying pan, medium-high. Fry the onion about 4 min until browned.</li>
+            <li>Add chicken in one layer, brown 5–6 min. Add garlic, 1 more min.</li>
+            <li>Roughly blitz the tomatoes and add with the chipotles and oregano.</li>
+            <li>Lower the heat, simmer about 4 min until thick and tender. Season with salt and vinegar.</li>
+            <li>Lid on, set aside. Reheat gently at 19:45.</li>
+          </ol>
+        </div>
+        <p class="tip">Doubled from a 12-taco recipe. Start with 6 chipotles if anyone is wary of heat.</p>
+        <p class="src">Rick Bayless, chicken tinga tacos (canned-chipotle option), doubled. Making it ahead and reheating is my suggestion; the recipe doesn't cover it.</p>
+      </div>
+    </article>
+
+    <article class="recipe">
+      <div class="in">
+        <p class="eyebrow">Toppings table · all prepped before 19:00</p>
+        <h3>Pico, slaw, crema, pickled chillies</h3>
+        <ul>
+          <li><b>Pico de gallo:</b> dice <span class="q">4</span> plum tomatoes, <span class="q">1 cup</span> white onion, <span class="q">4</span> serranos, <span class="q">⅔ cup</span> coriander. Add juice of 2 limes and <span class="q">1 tsp</span> salt.</li>
+          <li><b>Purple slaw:</b> finely shred 1 small red cabbage, toss with <span class="q">1 tsp</span> sea salt and juice of 2 limes. Rest 20 min, tossing now and then.</li>
+          <li><b>Avocado crema:</b> blend 2 avocados, <span class="q">6 tbsp</span> crème fraîche, a handful of coriander and juice of 1–2 limes. Loosen with water until it drizzles.</li>
+          <li><b>Pickled chillies (day before):</b> simmer <span class="q">100 ml</span> white wine vinegar, <span class="q">50 g</span> caster sugar, <span class="q">100 ml</span> water and 4 sliced red chillies for 2 min, then cool.</li>
+          <li>Plus radishes, feta or queso fresco, coriander leaves and lime wedges.</li>
+        </ul>
+        <p class="src">Pico from Mely Martínez, doubled. Slaw, crema and pickled chillies from Olive magazine, crema scaled 1.5×.</p>
+      </div>
+    </article>
+
+    <article class="recipe">
+      <button class="poke" type="button" aria-label="Poke the pisco sour">
+        <svg class="art" viewBox="0 0 600 220" aria-hidden="true">
+          <rect width="600" height="220" fill="var(--violet)" opacity=".14"/>
+          <g class="pop"><g fill="var(--bone)"><rect x="390" y="70" width="10" height="70" rx="5"/><rect x="404" y="58" width="10" height="82" rx="5"/><rect x="418" y="62" width="10" height="78" rx="5"/><rect x="432" y="74" width="10" height="66" rx="5"/><rect x="380" y="130" width="70" height="40" rx="14"/></g><text x="452" y="60" font-family="Creepster, fantasy" font-size="26" fill="var(--slime)">¡SALUD!</text></g>
+          <g class="taco">
+            <path d="M220 50 L380 50 Q378 120 300 128 Q222 120 220 50 Z" fill="#e6df9c"/>
+            <path d="M220 50 L380 50 Q379 72 375 80 L225 80 Q221 72 220 50 Z" fill="var(--bone)"/>
+            <g fill="#8a2a1f"><circle cx="280" cy="62" r="4"/><circle cx="300" cy="65" r="4"/><circle cx="320" cy="62" r="4"/></g>
+            <circle class="bubble" cx="270" cy="110" r="3" fill="var(--bone)"/><circle class="bubble" cx="305" cy="114" r="2.5" fill="var(--bone)"/><circle class="bubble" cx="330" cy="104" r="2" fill="var(--bone)"/>
+            <rect x="296" y="128" width="8" height="58" fill="#cfd6d3"/>
+            <ellipse cx="300" cy="190" rx="50" ry="9" fill="#cfd6d3"/>
+          </g>
+        </svg>
+        <span class="hint">tap me</span>
+      </button>
+      <div class="in">
+        <p class="eyebrow">Bar · guests make it</p>
+        <h3>Pisco sour, blender batch for 6</h3>
+        <div class="cols">
+          <ul>
+            <li><span class="q">360 ml</span> Peruvian pisco (Quebranta)</li>
+            <li><span class="q">120 ml</span> fresh lime juice</li>
+            <li><span class="q">120 ml</span> sugar syrup (1:1 sugar and water)</li>
+            <li><span class="q">1</span> egg white</li>
+            <li>A handful of ice</li>
+            <li>Angostura bitters</li>
+          </ul>
+          <ol class="steps">
+            <li>Blend everything except the bitters for 1 minute, until thick and frothy.</li>
+            <li>Half-fill six glasses, then top up each so the foam is shared evenly.</li>
+            <li>Drop 1–3 drops of bitters on the foam. Don't stir. (Three drops look like eyes. You're welcome.)</li>
+          </ol>
+        </div>
+        <p class="tip"><b>Shaker version, one drink:</b> 60 ml pisco, 20 ml lime, 20 ml syrup, ⅓ egg white. Shake hard without ice, then again with ice, strain into a chilled coupe.</p>
+        <p class="tip"><b>How much pisco:</b> two rounds of six at 60 ml each is 720 ml, so one 70 cl bottle is just short. Buy two.</p>
+        <p class="tip"><b>Story for the table:</b> the drink is usually credited to Victor Morris's bar in Lima, around 1916. A bartender who worked for him, Mario Bruiget, is said to have added the egg white and bitters. Chile disputes all of it.</p>
+        <p class="src">Batch from The Pisco People (240/80/80 ml for 4, scaled 1.5×); dry-then-wet shake from Tasting Table and Aglaia; history from MasterClass and Punch.</p>
+      </div>
+    </article>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px">
+    <h2>Shopping list</h2>
+    <div class="cols">
+      <ul>
+        <li>36 small corn tortillas</li>
+        <li>1.2 kg pork shoulder</li>
+        <li>900 g boneless chicken thighs</li>
+        <li>2 tins diced tomatoes, 1 tin chipotles in adobo</li>
+        <li>1 red cabbage, 2 avocados, 4 plum tomatoes</li>
+        <li>3 white onions, 1 garlic bulb, radishes</li>
+        <li>Coriander (2 bunches), serrano and red chillies</li>
+      </ul>
+      <ul>
+        <li>About 14 limes, 2 oranges</li>
+        <li>Crème fraîche, feta or queso fresco, eggs</li>
+        <li>White wine vinegar, caster sugar, cooking oil</li>
+        <li>Cumin, chilli powder, garlic and onion powder, oregano, bay</li>
+        <li>2 bottles Peruvian pisco, Angostura bitters, sugar</li>
+        <li>Lots of ice</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p class="eyebrow">Sources</p>
+    <ul>
+      <li><a href="https://grantourismotravels.com/wprm_print/pork-carnitas-recipe-for-tacos-de-carnitas-mexican-slow-cooked-pulled-pork-tacos">Grantourismo — pork carnitas</a></li>
+      <li><a href="https://ediblephoenix.ediblecommunities.com/recipe/recipes-oven-roasted-carnitas/">Edible Phoenix — oven-roasted carnitas</a></li>
+      <li><a href="https://rickbayless.com/recipe/chicken-tinga-tacos">Rick Bayless — chicken tinga tacos</a></li>
+      <li><a href="https://www.olivemagazine.com/recipes/fish-and-seafood/baja-california-style-battered-spicy-fish-tacos/">Olive magazine — slaw, crema and pickled chillies</a></li>
+      <li><a href="https://ellegourmet.ca/wprm_print/baja-fish-tacos">Mely Martínez — pico de gallo</a></li>
+      <li><a href="https://thepiscopeople.com.au/2018/01/14/make-pisco-sour-home/">The Pisco People — blender pisco sour</a></li>
+      <li><a href="https://www.tastingtable.com/688150/classic-pisco-sour-cocktail-recipe/">Tasting Table — classic pisco sour</a></li>
+      <li><a href="https://aglaiamagazine.com/classic-pisco-sour-cocktail-recipe">Aglaia — pisco sour method</a></li>
+      <li><a href="https://www.masterclass.com/articles/how-to-make-a-pisco-sour">MasterClass — pisco sour history</a></li>
+      <li><a href="https://punchdrink.com/articles/mastering-pisco-sour-cocktail-recipe-lynnette-marrero-llama-inn-nyc/">Punch — mastering the pisco sour</a></li>
+    </ul>
+    <p class="rip">R.I.P. leftovers</p>
+  </footer>
+</main>
+
+<script>
+(function(){
+  // papel picado flags, each with a little skull cut-out
+  var skull='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C7.6 3 5 6 5 9.8c0 2.3 1.1 3.7 2.2 4.5V17h2v-1.5h1.2V17h3.2v-1.5h1.2V17h2v-2.7c1.1-.8 2.2-2.2 2.2-4.5C19 6 16.4 3 12 3z" fill="#15111d"/><circle cx="9.3" cy="10" r="1.7" fill="currentColor"/><circle cx="14.7" cy="10" r="1.7" fill="currentColor"/></svg>';
+  var p=document.getElementById('picado'), n=window.innerWidth<520?7:12, h='';
+  for(var i=0;i<n;i++) h+='<div class="flag">'+skull+'</div>';
+  p.innerHTML=h;
+  [].forEach.call(p.querySelectorAll('.flag'),function(f){f.style.color=getComputedStyle(f).backgroundColor;});
+
+  // split title into letters so a few can flicker
+  var t=document.getElementById('title'), txt=t.textContent;
+  t.setAttribute('aria-label',txt);
+  t.innerHTML=txt.split('').map(function(c){return c===' '?' ':'<span class="l" aria-hidden="true">'+c.replace('&','&amp;')+'</span>';}).join('');
+
+  // tap a taco: something pops out
+  [].forEach.call(document.querySelectorAll('.poke'),function(b){
+    var timer;
+    b.addEventListener('click',function(){
+      b.classList.add('boo'); clearTimeout(timer);
+      timer=setTimeout(function(){b.classList.remove('boo');},1600);
+    });
+  });
+})();
+</script>
